@@ -24,7 +24,7 @@
         <mat-list-option
           #tagOption
           *ngFor="let item of tagList; let i = index"
-          (click)="onChange(item._id)"
+          (click)="onChange(item._id, $event)"
           checkboxPosition="before"
           [value]="item._id"
           (mouseenter)="btnIsActive = true"

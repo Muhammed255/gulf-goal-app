@@ -44,7 +44,7 @@ export class NewsComponent implements OnInit {
     });
   }
 
-  openDialog(id) {
+  openDialog(id?: string) {
     const options = {
       width: "670px",
       height: "560px",
