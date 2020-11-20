@@ -1,0 +1,6 @@
+<mat-toolbar color="accent" *ngIf="news">
+    <button mat-fab (click)="openDialog(news?._id)"><mat-icon>edit</mat-icon></button>
+    <button mat-fab (click)="onDelete(news?._id)"><mat-icon>delete</mat-icon></button>
+</mat-toolbar>
+<h1>{{news?.title}}</h1>
+<router-outlet></router-outlet>

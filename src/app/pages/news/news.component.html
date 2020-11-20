@@ -1,0 +1,135 @@
+
+<mat-toolbar color="accent">
+  <h2>News</h2>
+  <div class="menu-bar">
+    <button mat-button (click)="openDialog()">Create News</button>
+  </div>
+</mat-toolbar>
+<mat-spinner *ngIf="isLoading">
+</mat-spinner>
+<div class="content">
+<div fxLayout="row wrap" fxLayoutGap="16px grid">
+<div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let news of fetchedNews">
+<mat-card class="mat-elevation-z4">
+  <mat-card-header style="background-color: #8242ff">
+    <div
+	 *ngIf="news.userId"
+      mat-card-avatar
+      class="example-header-image"
+      [ngStyle]="{
+        'background-image':
+          ' url(' + news?.userId.image
+            ? news?.userId.image
+            : 'assets/img/users/user.jpg' + ')',
+        'background-size': 'cover'
+      }"
+    ></div>
+    <mat-card-title>{{ news.title }}</mat-card-title>
+    <mat-card-subtitle
+      >Added By:
+      <a mat-button *ngIf="news.userId">
+        {{ news?.userId.local.username }}
+      </a></mat-card-subtitle
+    >
+    <button class="menu-btn"
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+      aria-label="Example icon-button with a menu"
+    >
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="openDialog(news._id)">
+        <mat-icon>edit</mat-icon>
+        <span>Edit</span>
+      </button>
+      <button mat-menu-item (click)="onDelete(news._id)">
+        <mat-icon>delete_forever</mat-icon>
+        <span>Delete</span>
+      </button>
+      <button mat-menu-item (click)="onAddNewsToTrends(news._id)">
+        <mat-icon>{{
+          authUser?.trends_news.includes(news._id) ? "star" : "star_border"
+        }}</mat-icon>
+        <span>{{
+          authUser?.trends_news.includes(news._id)
+            ? "Remove From Trends"
+            : "Add To Trends"
+        }}</span>
+      </button>
+    </mat-menu>
+  </mat-card-header>
+  <img
+    mat-card-image
+    class="card-image"
+    [src]="news.image"
+    [alt]="news.title"
+    [routerLink]="['/account/news', news._id]"
+    style="height: 50%; width: 100%; margin: 0 0 20px 0"
+  />
+  <mat-card-content [routerLink]="['/account/news', news._id]">
+    <p>
+      {{ news.content }}
+    </p>
+  </mat-card-content>
+  <mat-card-actions style="background-color: #59ffff">
+    <button mat-mini-fab class="fav-btn" color="primary">
+      <mat-icon>{{ news.is_trend ? "star" : "star_border" }}</mat-icon>
+    </button>
+    <a mat-button color="primary" class="like-btn"
+      ><mat-icon>thumb_up</mat-icon><span> {{ news?.likes }} Likes(s) </span></a
+    >
+    <a mat-button color="primary" class="dislike-btn"
+      ><mat-icon>thumb_down</mat-icon
+      ><span> {{ news?.dislikes }} Dislikes(s) </span></a
+    >
+    <a mat-button color="warn" class="cmnt-btn"
+      ><mat-icon>comment</mat-icon
+      ><span *ngIf="news.comments"> {{ news?.comments.length }} Comment(s) </span></a
+    >
+  </mat-card-actions>
+</mat-card>
+</div>
+</div>
+</div>
+
+<!-- <mat-card *ngIf="showData" class="data">
+<mat-card-header>
+    <img matCardAvatar src="https://material.angular.io/assets/img/examples/shiba1.jpg">
+    <mat-card-title>Title</mat-card-title>
+    <mat-card-subtitle>Subtitle</mat-card-subtitle>
+</mat-card-header>
+<mat-card-content>
+    Text contentsosocial
+</mat-card-content>
+<mat-card-actions align="start" style="display:flex">
+    <button mat-button><mat-icon>add</mat-icon>Follow</button>
+    <button mat-button><mat-icon>search</mat-icon>View Profile</button>
+</mat-card-actions>
+</mat-card> -->
+<!-- 
+<div class="container"
+     fxLayout
+     fxLayout.xs="column"
+     fxLayoutAlign="center"
+     fxLayoutGap="10px"
+     fxLayoutGap.xs="0">
+  <div class="item item-1" fxFlex="40%">
+    <mat-list>
+      <h3 mat-subheader>News</h3>
+      <mat-list-item *ngFor="let news of fetchedNews" [routerLink]="['/account/news', news._id]" [routerLinkActive]="['is-active']">
+        <mat-icon mat-list-icon>new_releases</mat-icon>
+        <h4 class="new-title" mat-line>{{news.title}}</h4>
+        <p mat-line> {{news.created_at | date}} </p>
+        <button mat-mini-fab (click)="onAddNewsToTrends(news, news._id)">
+          <mat-icon>{{checkExist(news, news._id) ? 'star' :'star_border'}}</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+    
+  </div>
+  <hr>
+  <div class="item item-2" fxFlex="60%">
+    <app-news-details></app-news-details>
+  </div>
+</div> -->

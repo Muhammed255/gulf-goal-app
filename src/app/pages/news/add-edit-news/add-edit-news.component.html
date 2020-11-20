@@ -1,0 +1,85 @@
+<h1 mat-dialog-title style="text-align: center; font-size: 40px">
+  {{ headerTitle }}
+</h1>
+<div mat-dialog-content>
+  <form [formGroup]="newsForm" class="form-container">
+    <mat-form-field color="accent">
+      <input
+        matInput
+        formControlName="title"
+        type="text"
+        required
+        placeholder="Enter News Title"
+      />
+    </mat-form-field>
+    <mat-error
+      *ngIf="newsForm.controls.title.invalid && newsForm.controls.title.touched"
+      >News Title is Required</mat-error
+    >
+    <mat-form-field color="accent">
+      <textarea
+        matInput
+        formControlName="content"
+        rows="9"
+        cols="20"
+        required
+        placeholder="Enter News Content"
+      ></textarea>
+    </mat-form-field>
+    <mat-error
+      *ngIf="newsForm.controls.content.invalid && newsForm.controls.content.touched"
+      >News Content is Required</mat-error
+    >
+
+    <mat-form-field color="accent">
+      <input
+        matInput
+        formControlName="teamId"
+        type="text"
+        required
+        placeholder="Enter TeamId"
+      />
+    </mat-form-field>
+    <mat-error
+      *ngIf="
+        newsForm.controls.teamId.invalid && newsForm.controls.teamId.touched
+      "
+      >Team ID is Required</mat-error
+    >
+    <mat-select placeholder="Choose Tag" formControlName="tag" [compareWith]="compareCategoryObjects">
+      <mat-option *ngFor="let tag of tags" [value]="tag._id">
+        {{tag.tag}}
+      </mat-option>
+    </mat-select>
+    <mat-error
+      *ngIf="newsForm.controls.tag.invalid && newsForm.controls.tag.touched"
+      >News Tag is Required</mat-error
+    >
+    <div class="form-group col-8">
+      <br />
+      <button mat-stroked-button (click)="filePicker.click()" type="button">
+        Pick News Image
+      </button>
+
+      <input type="file" #filePicker id="img" (change)="onImagePicked($event)" />
+    </div>
+    <div
+      class="image-preview form-group col-8"
+      *ngIf="imagePreview !== '' && imagePreview && newsForm.get('image').valid"
+    >
+      <img [src]="imagePreview" [alt]="newsForm.value.title" />
+    </div>
+    <br>
+  </form>
+</div>
+<div mat-dialog-actions class="actions">
+  <button
+    mat-button
+    [mat-dialog-close]="newsForm.value"
+    cdkFocusInitial
+    color="primary"
+  >
+    Save
+  </button>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+</div>

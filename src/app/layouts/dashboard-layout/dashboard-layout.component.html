@@ -1,0 +1,89 @@
+<div id="main" class="h-100">
+  <header class="header">
+    <mat-toolbar
+      color="primary"
+      class="top-toolbar mat-elevation-z2"
+    >
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex>
+        <div fxLayout="row" fxLayoutAlign="center center">
+          <a
+            routerLink="/"
+            fxLayout="row"
+            fxLayoutAlign="start center"
+            class="logo"
+            ngClass.xs="mobile"
+            (click)="closeSubMenus()"
+          >
+            <img src="assets/img/logo.png" alt="logo"/>
+            <span class="mx-2">GULF GOAL</span>
+          </a>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" class="w-100">
+          <button mat-icon-button (click)="sidenav.toggle()">
+            <mat-icon>menu</mat-icon>
+          </button>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center">
+          <div
+            fxLayout="row"
+            fxLayoutAlign="start center"
+            fxShow="false"
+            fxShow.gt-xs
+            class="search-bar"
+          >
+            <form method="get">
+              <input
+                type="text"
+                placeholder="Type to search..."
+                class="mat-elevation-z3"
+                [class.show]="toggleSearchBar"
+              />
+              <button
+                mat-icon-button
+                (click)="toggleSearchBar = !toggleSearchBar"
+                type="button"
+              >
+                <mat-icon>search</mat-icon>
+              </button>
+            </form>
+          </div>
+          <app-user-menu></app-user-menu>
+        </div>
+      </div>
+    </mat-toolbar>
+  </header>
+
+  <mat-drawer-container class="page-wrapper">
+    <mat-drawer
+      #sidenav
+      opened="true"
+      mode="side"
+      (openedStart)="showSidenav = !showSidenav"
+      (closedStart)="showSidenav = !showSidenav"
+      class="sidenav mat-elevation-z6"
+      autoFocus="false"
+    >
+      <mat-toolbar class="top-toolbar" color="primary">
+        <a
+          routerLink="/"
+          fxLayout="row"
+          fxLayoutAlign="start center"
+          class="logo"
+        >
+          <img src="assets/img/logo.png" alt="logo"/>
+          <span class="mx-2">GULF GOAL</span>
+        </a>
+      </mat-toolbar>
+      <app-sidenav></app-sidenav>
+    </mat-drawer>
+    <mat-drawer-content>
+      <router-outlet></router-outlet>
+    </mat-drawer-content>
+  </mat-drawer-container>
+
+<!--  <mat-toolbar color="primary" class="footer" [class.full-width]="!showSidenav">
+    <a mat-raised-button color="accent">
+      <i class="far fa-futbol"></i> @copy CopyRights to GulfGoal Team
+    </a>
+  </mat-toolbar> -->
+</div>

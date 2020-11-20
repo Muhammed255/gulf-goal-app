@@ -1,0 +1,8 @@
+.todo-list{
+    height: 267px;
+}
+:host {
+    ::ng-deep.mat-pseudo-checkbox{
+      display: none !important;
+    }
+}

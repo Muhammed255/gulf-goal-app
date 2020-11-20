@@ -1,0 +1,45 @@
+.content {
+    padding: 16px;
+}
+
+.content > mat-card {
+    width: 200px;
+    max-height: 434px;
+}
+
+mat-card-title {
+    font-size: 17px;
+    color: #FFF;
+}
+
+mat-toolbar {
+    justify-content: space-between;
+}
+
+
+mat-spinner {
+  margin: auto;
+}
+
+
+.is-active {
+  background-color: lightgray;
+}
+
+.new-title {
+  font-size: 26px;
+  cursor: pointer;
+}
+
+.fav-button, .like-btn, .dislike-btn, .cmnt-btn {
+    bottom: 4px;
+    left: 3px;
+}
+
+.menu-btn {
+    margin-left: auto;
+}
+
+.card-image {
+  max-height: 170px;
+}

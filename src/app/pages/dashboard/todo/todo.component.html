@@ -1,0 +1,55 @@
+<mat-card>
+  <mat-card-header fxLayoutAlign="center">
+    <mat-card-subtitle><h2>Tag List</h2></mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="form">
+      <div fxLayoutAlign="space-between">
+        <mat-form-field class="w-100">
+          <input
+            matInput
+            placeholder="Tag..."
+            formControlName="tag"
+            (keyup)="onAddTag($event)"
+            [(ngModel)]="newTagText"
+          />
+        </mat-form-field>
+        <button mat-mini-fab color="primary" (click)="onAddTag($event)">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </form>
+    <div perfectScrollbar class="todo-list">
+      <mat-selection-list>
+        <mat-list-option
+          #tagOption
+          *ngFor="let item of tagList; let i = index"
+          (click)="onChange(item._id)"
+          checkboxPosition="before"
+          [value]="item._id"
+          (mouseenter)="btnIsActive = true"
+          (mouseleave)="btnIsActive = false"
+        >
+          <div fxLayoutAlign="space-between center">
+            <span class="text-truncate">{{ item.tag }}</span>
+              <button
+                mat-icon-button
+                *ngIf="btnIsActive"
+                (click)="onDeleteTag(item._id)"
+                color="warn"
+              >
+                <mat-icon>delete_forever</mat-icon>
+              </button>
+              <!-- <button
+                mat-icon-button
+                (click)="onUpdateTag(item._id)"
+                color="warn"
+              >
+                <mat-icon>edit</mat-icon>
+              </button> -->
+          </div>
+        </mat-list-option>
+      </mat-selection-list>
+    </div>
+  </mat-card-content>
+</mat-card>

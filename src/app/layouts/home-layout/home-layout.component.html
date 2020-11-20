@@ -1,0 +1,40 @@
+<mat-drawer-container class="landing-container h-100">
+  <mat-drawer-content>
+    <mat-toolbar color="primary" class="landing-toolbar mat-elevation-z4">
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex>
+        <div fxLayout="row" fxLayoutAlign="center center">
+          <a
+            routerLink="/"
+            fxLayout="row"
+            fxLayoutAlign="start center"
+            class="logo"
+          >
+            <img src="assets/img/logo.png" alt="logo" />
+            <span class="mx-2">GULF GOAL</span>
+          </a>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center center">
+          <div fxShow="false" fxShow.gt-sm>
+            <button mat-button class="mx-1" routerLink="/login">Login</button>
+            <button mat-button class="mx-1" routerLink="/signup">Signup</button>
+          </div>
+        </div>
+      </div>
+    </mat-toolbar>
+    <div class="pb-2">
+      <router-outlet></router-outlet>
+    </div>
+
+    <mat-toolbar color="primary">
+      <div
+        fxLayout.xs="column"
+        fxLayout.gt-xs="row wrap"
+        fxLayoutAlign="space-between center"
+        class="landing-footer"
+      >
+        <span>Copyright ©2020 All Rights Reserved</span>
+        <span>made by <a mat-button>Gulf Goal</a></span>
+      </div>
+    </mat-toolbar>
+  </mat-drawer-content>
+</mat-drawer-container>
